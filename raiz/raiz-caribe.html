@@ -1,0 +1,1435 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="description" content="Asociación Raíz Caribe – Agroempresaria del Caribe. Impacto social, sostenibilidad y desarrollo comunitario."/>
+<title>Raíz Caribe – Asociación Agroempresaria del Caribe</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+  :root{
+    --verde:#2e7d32;
+    --verde-claro:#4caf50;
+    --verde-suave:#e8f5e9;
+    --naranja:#f57c00;
+    --naranja-cta:#ff8f00;
+    --beige:#faf7f2;
+    --tierra:#8d6e63;
+    --gris:#f5f5f3;
+    --gris-texto:#6b6b6b;
+    --blanco:#ffffff;
+    --negro:#1a1a1a;
+    --sombra:0 4px 24px rgba(0,0,0,.08);
+    --sombra-hover:0 12px 40px rgba(0,0,0,.14);
+    --radius:12px;
+    --radius-lg:20px;
+    --font-display:'Playfair Display',serif;
+    --font-body:'DM Sans',sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth;font-size:16px}
+  body{font-family:var(--font-body);background:var(--blanco);color:var(--negro);overflow-x:hidden}
+
+  /* ========== PÁGINA ACTIVA ========== */
+  .page{display:none}
+  .page.active{display:block}
+
+  /* ========== NAV ========== */
+  nav{
+    position:fixed;top:0;left:0;width:100%;z-index:999;
+    background:rgba(255,255,255,.95);backdrop-filter:blur(12px);
+    border-bottom:1px solid rgba(46,125,50,.1);
+    padding:0 5%;height:72px;display:flex;align-items:center;justify-content:space-between;
+    transition:box-shadow .3s;
+  }
+  nav.scrolled{box-shadow:0 2px 20px rgba(0,0,0,.1)}
+  .nav-logo{display:flex;align-items:center;gap:10px;cursor:pointer;text-decoration:none}
+  .nav-logo-icon{width:44px;height:44px}
+  .nav-logo-text{font-family:var(--font-display);font-size:1.1rem;font-weight:700;color:var(--negro);line-height:1.1}
+  .nav-logo-sub{font-size:.65rem;color:var(--gris-texto);font-weight:400;letter-spacing:.04em}
+  .nav-links{display:flex;align-items:center;gap:2rem}
+  .nav-links a{font-size:.88rem;font-weight:500;color:var(--negro);text-decoration:none;letter-spacing:.02em;transition:color .2s;cursor:pointer}
+  .nav-links a:hover{color:var(--verde)}
+  .btn-nav{
+    background:var(--verde);color:#fff!important;
+    padding:.55rem 1.4rem;border-radius:30px;font-size:.85rem!important;
+    transition:background .2s,transform .2s!important;
+  }
+  .btn-nav:hover{background:var(--verde-claro)!important;transform:translateY(-1px)}
+  .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:8px}
+  .hamburger span{width:24px;height:2px;background:var(--negro);border-radius:2px;transition:.3s}
+  .mobile-menu{
+    display:none;position:fixed;top:72px;left:0;width:100%;
+    background:#fff;border-bottom:1px solid #eee;z-index:998;
+    flex-direction:column;padding:1.5rem 5%;gap:1.2rem;
+  }
+  .mobile-menu.open{display:flex}
+  .mobile-menu a{font-size:1rem;font-weight:500;color:var(--negro);text-decoration:none;cursor:pointer}
+
+  /* ========== BOTONES ========== */
+  .btn-primary{
+    display:inline-flex;align-items:center;gap:8px;
+    background:var(--naranja-cta);color:#fff;
+    padding:.8rem 2rem;border-radius:30px;font-size:.9rem;font-weight:600;
+    text-decoration:none;border:none;cursor:pointer;
+    transition:background .2s,transform .2s,box-shadow .2s;
+    letter-spacing:.02em;
+  }
+  .btn-primary:hover{background:#e65100;transform:translateY(-2px);box-shadow:0 8px 24px rgba(230,81,0,.3)}
+  .btn-secondary{
+    display:inline-flex;align-items:center;gap:8px;
+    background:transparent;color:#fff;
+    padding:.8rem 2rem;border-radius:30px;font-size:.9rem;font-weight:500;
+    border:2px solid rgba(255,255,255,.7);cursor:pointer;
+    transition:all .2s;text-decoration:none;
+  }
+  .btn-secondary:hover{background:rgba(255,255,255,.15);border-color:#fff}
+  .btn-verde{
+    display:inline-flex;align-items:center;gap:8px;
+    background:var(--verde);color:#fff;
+    padding:.8rem 2rem;border-radius:30px;font-size:.9rem;font-weight:600;
+    border:none;cursor:pointer;transition:all .2s;
+  }
+  .btn-verde:hover{background:var(--verde-claro);transform:translateY(-2px)}
+  .btn-outline-verde{
+    display:inline-flex;align-items:center;gap:8px;
+    background:transparent;color:var(--verde);
+    padding:.8rem 2rem;border-radius:30px;font-size:.9rem;font-weight:600;
+    border:2px solid var(--verde);cursor:pointer;transition:all .2s;
+  }
+  .btn-outline-verde:hover{background:var(--verde);color:#fff}
+
+  /* ========== HERO ========== */
+  .hero{
+    position:relative;height:100vh;width:100%;overflow:hidden;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .hero-bg{
+    position:absolute;inset:0;
+    background:url('https://images.unsplash.com/photo-1500595046743-cd271d694d30?w=1920&q=80') center/cover no-repeat;
+    transform:scale(1.05);
+    animation:heroZoom 20s ease-in-out infinite alternate;
+  }
+  @keyframes heroZoom{0%{transform:scale(1.05)}100%{transform:scale(1.12)}}
+  .hero-overlay{
+    position:absolute;inset:0;
+    background:linear-gradient(160deg,rgba(10,40,15,.72) 0%,rgba(20,50,20,.55) 60%,rgba(180,80,0,.25) 100%);
+  }
+  .hero-content{
+    position:relative;z-index:2;text-align:center;
+    padding:0 5%;max-width:800px;
+    animation:fadeInUp .9s ease both;
+  }
+  @keyframes fadeInUp{from{opacity:0;transform:translateY(32px)}to{opacity:1;transform:translateY(0)}}
+  .hero-badge{
+    display:inline-flex;align-items:center;gap:8px;
+    background:rgba(255,255,255,.12);backdrop-filter:blur(8px);
+    border:1px solid rgba(255,255,255,.25);color:#fff;
+    padding:.45rem 1.2rem;border-radius:30px;font-size:.78rem;font-weight:500;
+    letter-spacing:.08em;text-transform:uppercase;margin-bottom:1.5rem;
+  }
+  .hero-badge-dot{width:7px;height:7px;background:var(--naranja-cta);border-radius:50%}
+  .hero h1{
+    font-family:var(--font-display);font-size:clamp(2.4rem,6vw,4.2rem);font-weight:700;
+    color:#fff;line-height:1.1;margin-bottom:1.2rem;
+  }
+  .hero h1 em{color:var(--naranja-cta);font-style:normal}
+  .hero p{
+    font-size:clamp(1rem,2vw,1.18rem);color:rgba(255,255,255,.85);
+    line-height:1.7;margin-bottom:2.2rem;max-width:580px;margin-left:auto;margin-right:auto;
+  }
+  .hero-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+  .hero-scroll{
+    position:absolute;bottom:2.5rem;left:50%;transform:translateX(-50%);
+    display:flex;flex-direction:column;align-items:center;gap:.5rem;
+    color:rgba(255,255,255,.6);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;
+    animation:bounce 2s infinite;cursor:pointer;
+  }
+  .hero-scroll svg{animation:bounceArrow 1.5s infinite}
+  @keyframes bounce{0%,100%{opacity:.6}50%{opacity:1}}
+  @keyframes bounceArrow{0%,100%{transform:translateY(0)}50%{transform:translateY(5px)}}
+
+  /* ========== SECCIÓN GENERAL ========== */
+  section{padding:5rem 5%}
+  .section-label{
+    display:inline-block;font-size:.72rem;font-weight:600;letter-spacing:.14em;
+    text-transform:uppercase;color:var(--verde);margin-bottom:.75rem;
+  }
+  .section-title{
+    font-family:var(--font-display);font-size:clamp(1.8rem,4vw,2.8rem);
+    font-weight:700;line-height:1.15;color:var(--negro);margin-bottom:1rem;
+  }
+  .section-subtitle{
+    font-size:1.05rem;color:var(--gris-texto);line-height:1.7;max-width:560px;
+  }
+  .section-header{text-align:center;margin-bottom:3.5rem}
+  .section-header .section-subtitle{margin:0 auto}
+
+  /* ========== CARRUSEL ========== */
+  .carousel-section{background:var(--gris);padding:4rem 0;overflow:hidden}
+  .carousel-inner{padding:0 5%;margin-bottom:1.5rem}
+  .carousel-track-wrap{overflow:hidden;border-radius:var(--radius-lg)}
+  .carousel-track{
+    display:flex;gap:1.5rem;
+    transition:transform .5s cubic-bezier(.25,.1,.25,1);
+    cursor:grab;
+  }
+  .carousel-track:active{cursor:grabbing}
+  .carousel-slide{
+    flex:0 0 calc(50% - .75rem);
+    border-radius:var(--radius-lg);overflow:hidden;
+    position:relative;aspect-ratio:16/8;
+    background:#ddd;
+  }
+  .carousel-slide img{width:100%;height:100%;object-fit:cover;display:block}
+  .carousel-slide-caption{
+    position:absolute;bottom:0;left:0;right:0;
+    background:linear-gradient(transparent,rgba(0,0,0,.7));
+    color:#fff;padding:1.5rem 1.2rem .9rem;
+    font-size:.9rem;font-weight:500;
+  }
+  .carousel-controls{display:flex;align-items:center;justify-content:center;gap:1rem;margin-top:1.2rem}
+  .carousel-btn{
+    width:42px;height:42px;border-radius:50%;border:1.5px solid var(--verde);
+    background:transparent;color:var(--verde);cursor:pointer;
+    display:flex;align-items:center;justify-content:center;transition:all .2s;
+  }
+  .carousel-btn:hover{background:var(--verde);color:#fff}
+  .carousel-dots{display:flex;gap:.5rem}
+  .carousel-dot{
+    width:8px;height:8px;border-radius:50%;background:#ccc;
+    border:none;cursor:pointer;transition:.2s;
+  }
+  .carousel-dot.active{background:var(--verde);width:24px;border-radius:4px}
+
+  /* ========== IMPACTO SOCIAL ========== */
+  .impacto-grid{
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+    gap:1.5rem;
+  }
+  .impacto-card{
+    background:var(--blanco);border:1px solid rgba(0,0,0,.06);
+    border-radius:var(--radius-lg);padding:2rem;
+    transition:transform .3s,box-shadow .3s,border-color .3s;
+    cursor:default;position:relative;overflow:hidden;
+  }
+  .impacto-card::before{
+    content:'';position:absolute;inset:0;
+    background:linear-gradient(135deg,var(--verde-suave),transparent);
+    opacity:0;transition:opacity .3s;
+  }
+  .impacto-card:hover{transform:translateY(-6px);box-shadow:var(--sombra-hover);border-color:rgba(46,125,50,.2)}
+  .impacto-card:hover::before{opacity:1}
+  .impacto-icon{
+    width:56px;height:56px;border-radius:14px;
+    background:var(--verde-suave);display:flex;align-items:center;justify-content:center;
+    margin-bottom:1.2rem;position:relative;z-index:1;
+    transition:background .3s;
+  }
+  .impacto-card:hover .impacto-icon{background:var(--verde);color:#fff}
+  .impacto-icon svg{width:26px;height:26px;color:var(--verde);transition:color .3s}
+  .impacto-card:hover .impacto-icon svg{color:#fff}
+  .impacto-stat{
+    font-family:var(--font-display);font-size:2rem;font-weight:700;
+    color:var(--verde);margin-bottom:.3rem;position:relative;z-index:1;
+  }
+  .impacto-card h3{font-size:1rem;font-weight:600;margin-bottom:.5rem;position:relative;z-index:1}
+  .impacto-card p{font-size:.88rem;color:var(--gris-texto);line-height:1.65;position:relative;z-index:1}
+
+  /* ========== NOSOTROS ========== */
+  .nosotros-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center}
+  .nosotros-img-wrap{position:relative;border-radius:var(--radius-lg);overflow:hidden;aspect-ratio:4/3}
+  .nosotros-img-wrap img{width:100%;height:100%;object-fit:cover}
+  .nosotros-img-badge{
+    position:absolute;bottom:1.5rem;right:1.5rem;
+    background:#fff;border-radius:var(--radius);padding:1rem 1.2rem;
+    box-shadow:var(--sombra);text-align:center;
+  }
+  .nosotros-img-badge strong{display:block;font-size:1.6rem;font-family:var(--font-display);color:var(--verde)}
+  .nosotros-img-badge span{font-size:.75rem;color:var(--gris-texto)}
+  .nosotros-text .section-label{margin-bottom:.5rem}
+  .nosotros-text .section-title{margin-bottom:1rem}
+  .nosotros-text p{color:var(--gris-texto);line-height:1.8;margin-bottom:1rem;font-size:.95rem}
+  .timeline{margin:2rem 0;display:flex;flex-direction:column;gap:1.2rem}
+  .timeline-item{display:flex;gap:1rem;align-items:flex-start}
+  .timeline-dot{
+    width:36px;height:36px;border-radius:50%;
+    background:var(--verde-suave);border:2px solid var(--verde);
+    display:flex;align-items:center;justify-content:center;flex-shrink:0;
+    font-size:.75rem;font-weight:700;color:var(--verde);
+  }
+  .timeline-item h4{font-size:.9rem;font-weight:600;margin-bottom:.2rem}
+  .timeline-item p{font-size:.83rem;color:var(--gris-texto)}
+  .lineas-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1.2rem;margin-top:3rem}
+  .linea-card{
+    border-radius:var(--radius);overflow:hidden;position:relative;aspect-ratio:4/3;cursor:pointer;
+  }
+  .linea-card img{width:100%;height:100%;object-fit:cover;transition:transform .4s}
+  .linea-card:hover img{transform:scale(1.07)}
+  .linea-overlay{
+    position:absolute;inset:0;
+    background:linear-gradient(transparent 30%,rgba(0,0,0,.75));
+    display:flex;flex-direction:column;justify-content:flex-end;padding:1rem;
+    color:#fff;
+  }
+  .linea-overlay h4{font-size:.95rem;font-weight:600;margin-bottom:.2rem}
+  .linea-overlay p{font-size:.75rem;opacity:.85;line-height:1.4}
+
+  /* ========== PROPÓSITO / VALORES ========== */
+  .proposito-section{background:var(--negro);color:#fff;text-align:center}
+  .proposito-section .section-label{color:var(--naranja-cta)}
+  .proposito-section .section-title{color:#fff}
+  .proposito-text{font-size:clamp(1rem,2.5vw,1.3rem);line-height:1.8;max-width:700px;margin:0 auto 3rem;color:rgba(255,255,255,.8)}
+  .valores-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1.5rem;text-align:left}
+  .valor-item{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:var(--radius);padding:1.5rem}
+  .valor-item svg{width:28px;height:28px;color:var(--naranja-cta);margin-bottom:.8rem}
+  .valor-item h4{font-size:.9rem;font-weight:600;margin-bottom:.3rem}
+  .valor-item p{font-size:.78rem;color:rgba(255,255,255,.6);line-height:1.5}
+
+  /* ========== MIEMBROS ========== */
+  .miembros-section{background:var(--beige)}
+  .miembros-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:1.5rem}
+  .miembro-card{
+    background:#fff;border-radius:var(--radius-lg);overflow:hidden;
+    box-shadow:var(--sombra);cursor:pointer;
+    transition:transform .3s,box-shadow .3s;
+  }
+  .miembro-card:hover{transform:translateY(-6px);box-shadow:var(--sombra-hover)}
+  .miembro-img{aspect-ratio:1;overflow:hidden;background:var(--gris)}
+  .miembro-img img{width:100%;height:100%;object-fit:cover;transition:transform .4s}
+  .miembro-card:hover .miembro-img img{transform:scale(1.06)}
+  .miembro-info{padding:1.2rem}
+  .miembro-info h3{font-size:.95rem;font-weight:600;margin-bottom:.3rem}
+  .miembro-info p{font-size:.8rem;color:var(--gris-texto);line-height:1.5;margin-bottom:.8rem}
+  .miembro-tag{
+    display:inline-block;font-size:.68rem;font-weight:600;letter-spacing:.06em;
+    text-transform:uppercase;background:var(--verde-suave);color:var(--verde);
+    padding:.25rem .7rem;border-radius:20px;
+  }
+
+  /* ========== MIEMBRO INDIVIDUAL ========== */
+  .miembro-hero{
+    height:60vh;position:relative;display:flex;align-items:flex-end;
+    padding:3rem 5%;margin-top:72px;
+  }
+  .miembro-hero-bg{position:absolute;inset:0;background-size:cover;background-position:center}
+  .miembro-hero-overlay{position:absolute;inset:0;background:linear-gradient(transparent 20%,rgba(0,0,0,.75))}
+  .miembro-hero-content{position:relative;z-index:2;color:#fff}
+  .miembro-hero-content h1{font-family:var(--font-display);font-size:clamp(1.8rem,4vw,3rem);font-weight:700;margin-bottom:.5rem}
+  .miembro-hero-content p{font-size:1rem;opacity:.85}
+  .miembro-body{padding:4rem 5%;max-width:1200px;margin:0 auto}
+  .miembro-body-grid{display:grid;grid-template-columns:2fr 1fr;gap:3rem;align-items:start}
+  .miembro-desc{color:var(--gris-texto);line-height:1.8;font-size:.95rem}
+  .miembro-sidebar{background:var(--gris);border-radius:var(--radius-lg);padding:1.8rem}
+  .miembro-sidebar h3{font-size:1rem;font-weight:600;margin-bottom:1.2rem}
+  .contact-item{display:flex;align-items:center;gap:.8rem;margin-bottom:1rem;font-size:.85rem;color:var(--gris-texto)}
+  .contact-item svg{width:18px;height:18px;flex-shrink:0;color:var(--verde)}
+  .social-links{display:flex;gap:.8rem;margin-top:1.2rem;flex-wrap:wrap}
+  .social-link{
+    display:flex;align-items:center;gap:.5rem;
+    padding:.5rem 1rem;border-radius:20px;font-size:.78rem;font-weight:500;
+    text-decoration:none;transition:opacity .2s;
+  }
+  .social-link:hover{opacity:.8}
+  .social-link.instagram{background:#e1306c;color:#fff}
+  .social-link.facebook{background:#1877f2;color:#fff}
+  .social-link.whatsapp{background:#25d366;color:#fff}
+  .social-link.web{background:var(--negro);color:#fff}
+  .productos-title{font-family:var(--font-display);font-size:1.5rem;font-weight:700;margin:3rem 0 1.5rem}
+  .productos-filters{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:1.5rem}
+  .filter-btn{
+    padding:.4rem 1rem;border-radius:20px;font-size:.78rem;font-weight:500;
+    border:1.5px solid #ddd;background:transparent;cursor:pointer;transition:all .2s;
+  }
+  .filter-btn.active,.filter-btn:hover{background:var(--verde);color:#fff;border-color:var(--verde)}
+  .productos-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:1.2rem}
+  .producto-card{background:#fff;border-radius:var(--radius);border:1px solid rgba(0,0,0,.06);overflow:hidden}
+  .producto-card img{width:100%;aspect-ratio:1;object-fit:cover}
+  .producto-card-body{padding:1rem}
+  .producto-card-body h4{font-size:.9rem;font-weight:600;margin-bottom:.3rem}
+  .producto-card-body p{font-size:.78rem;color:var(--gris-texto)}
+  .producto-card-body .precio{font-weight:600;color:var(--verde);margin-top:.4rem}
+
+  /* ========== AGROLAB ========== */
+  .agrolab-hero{
+    height:100vh;position:relative;margin-top:72px;
+    display:flex;align-items:center;justify-content:center;text-align:center;
+    overflow:hidden;
+  }
+  .agrolab-hero-bg{
+    position:absolute;inset:0;
+    background:url('https://images.unsplash.com/photo-1464226184884-fa280b87c399?w=1920&q=80') center/cover;
+    animation:heroZoom 20s ease-in-out infinite alternate;
+  }
+  .agrolab-hero-overlay{position:absolute;inset:0;background:linear-gradient(160deg,rgba(20,60,20,.8),rgba(60,30,0,.5))}
+  .agrolab-hero-content{position:relative;z-index:2;color:#fff;padding:0 5%;max-width:750px;animation:fadeInUp .9s both}
+  .agrolab-logo-text{font-family:var(--font-display);font-size:clamp(2.8rem,7vw,5rem);font-weight:700;line-height:1}
+  .agrolab-logo-text span{color:var(--naranja-cta)}
+  .agrolab-hero-sub{font-size:1rem;letter-spacing:.14em;text-transform:uppercase;opacity:.7;margin-bottom:.8rem}
+  .agrolab-hero p{font-size:clamp(.95rem,2vw,1.15rem);opacity:.85;line-height:1.7;margin:1.2rem 0 2rem}
+
+  /* ========== AGROLAB QUIÉNES SOMOS ========== */
+  .qs-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center}
+  .qs-img{border-radius:var(--radius-lg);overflow:hidden;aspect-ratio:4/3}
+  .qs-img img{width:100%;height:100%;object-fit:cover}
+
+  /* ========== MISIÓN / VISIÓN ========== */
+  .mv-grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem}
+  .mv-card{
+    border-radius:var(--radius-lg);padding:2.5rem;position:relative;overflow:hidden;
+  }
+  .mv-card.mision{background:var(--verde);color:#fff}
+  .mv-card.vision{background:var(--negro);color:#fff}
+  .mv-card .mv-num{
+    font-family:var(--font-display);font-size:5rem;font-weight:700;
+    opacity:.1;position:absolute;top:-1rem;right:1rem;line-height:1;
+  }
+  .mv-card h3{font-family:var(--font-display);font-size:1.5rem;font-weight:700;margin-bottom:1rem;position:relative;z-index:1}
+  .mv-card p{font-size:.9rem;line-height:1.75;opacity:.9;position:relative;z-index:1}
+
+  /* ========== ASESORÍAS ========== */
+  .asesorias-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.5rem}
+  .asesoria-card{
+    background:var(--blanco);border:1px solid rgba(0,0,0,.06);
+    border-radius:var(--radius-lg);padding:2rem;
+    transition:transform .3s,box-shadow .3s;
+  }
+  .asesoria-card:hover{transform:translateY(-5px);box-shadow:var(--sombra-hover)}
+  .asesoria-card .asesoria-icon{
+    width:52px;height:52px;border-radius:12px;background:var(--verde-suave);
+    display:flex;align-items:center;justify-content:center;margin-bottom:1.2rem;
+  }
+  .asesoria-card .asesoria-icon svg{width:24px;height:24px;color:var(--verde)}
+  .asesoria-card h3{font-size:.95rem;font-weight:600;margin-bottom:.5rem}
+  .asesoria-card p{font-size:.82rem;color:var(--gris-texto);line-height:1.65}
+
+  /* ========== CAPACITACIONES ========== */
+  .cap-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.5rem}
+  .cap-card{
+    border-radius:var(--radius-lg);overflow:hidden;position:relative;aspect-ratio:4/3;cursor:pointer;
+  }
+  .cap-card img{width:100%;height:100%;object-fit:cover;transition:transform .4s}
+  .cap-card:hover img{transform:scale(1.06)}
+  .cap-overlay{
+    position:absolute;inset:0;
+    background:linear-gradient(transparent 20%,rgba(0,0,0,.8));
+    display:flex;flex-direction:column;justify-content:flex-end;
+    padding:1.5rem;color:#fff;
+  }
+  .cap-overlay .cap-tag{
+    display:inline-block;background:var(--naranja-cta);color:#fff;
+    font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+    padding:.3rem .8rem;border-radius:20px;margin-bottom:.6rem;align-self:flex-start;
+  }
+  .cap-overlay h3{font-size:1rem;font-weight:600;margin-bottom:.3rem}
+  .cap-overlay p{font-size:.78rem;opacity:.8}
+
+  /* ========== ALIADOS ========== */
+  .aliados-section{background:var(--gris);padding:4rem 0;overflow:hidden}
+  .aliados-inner{padding:0 5%;text-align:center;margin-bottom:2rem}
+  .aliados-track-wrap{overflow:hidden}
+  .aliados-track{
+    display:flex;gap:2.5rem;width:max-content;
+    animation:slideAliados 25s linear infinite;
+  }
+  .aliados-track:hover{animation-play-state:paused}
+  @keyframes slideAliados{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+  .aliado-logo{
+    width:140px;height:60px;
+    display:flex;align-items:center;justify-content:center;
+    background:#fff;border-radius:var(--radius);border:1px solid rgba(0,0,0,.06);
+    padding:.8rem 1.2rem;filter:grayscale(1);opacity:.6;
+    transition:filter .3s,opacity .3s;flex-shrink:0;
+    font-size:.7rem;font-weight:600;color:#aaa;letter-spacing:.05em;text-align:center;
+  }
+  .aliado-logo:hover{filter:grayscale(0);opacity:1}
+
+  /* ========== FORMULARIO ========== */
+  .formulario-section{background:var(--beige)}
+  .formulario-wrap{max-width:700px;margin:0 auto}
+  .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem}
+  .form-group{display:flex;flex-direction:column;gap:.4rem}
+  .form-group.full{grid-column:1/-1}
+  .form-group label{font-size:.82rem;font-weight:500;color:var(--negro)}
+  .form-group input,
+  .form-group select,
+  .form-group textarea{
+    padding:.75rem 1rem;border:1.5px solid rgba(0,0,0,.12);
+    border-radius:var(--radius);font-family:var(--font-body);font-size:.88rem;
+    background:#fff;transition:border-color .2s,box-shadow .2s;outline:none;
+  }
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus{
+    border-color:var(--verde);box-shadow:0 0 0 3px rgba(46,125,50,.12);
+  }
+  .form-group textarea{resize:vertical;min-height:120px}
+  .form-success{
+    display:none;background:var(--verde-suave);border:1px solid var(--verde);
+    border-radius:var(--radius);padding:1.5rem;text-align:center;
+    color:var(--verde);font-weight:500;margin-top:1rem;
+  }
+
+  /* ========== CONTACTO ========== */
+  .contacto-grid{display:grid;grid-template-columns:1fr 1.3fr;gap:4rem;align-items:start}
+  .contacto-info h2{font-family:var(--font-display);font-size:2rem;font-weight:700;margin-bottom:1rem}
+  .contacto-info p{color:var(--gris-texto);line-height:1.7;margin-bottom:2rem}
+  .contacto-dato{display:flex;align-items:flex-start;gap:1rem;margin-bottom:1.5rem}
+  .contacto-dato-icon{
+    width:46px;height:46px;background:var(--verde-suave);border-radius:12px;
+    display:flex;align-items:center;justify-content:center;flex-shrink:0;
+  }
+  .contacto-dato-icon svg{width:20px;height:20px;color:var(--verde)}
+  .contacto-dato-text span{display:block;font-size:.72rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--gris-texto);margin-bottom:.2rem}
+  .contacto-dato-text strong{font-size:.9rem;color:var(--negro)}
+
+  /* ========== FOOTER ========== */
+  footer{background:var(--negro);color:#fff;padding:3.5rem 5% 2rem}
+  .footer-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:3rem;margin-bottom:2.5rem}
+  .footer-brand p{font-size:.82rem;color:rgba(255,255,255,.55);line-height:1.7;margin:.8rem 0 1.2rem}
+  .footer-social{display:flex;gap:.8rem}
+  .footer-social a{
+    width:36px;height:36px;border-radius:50%;
+    border:1px solid rgba(255,255,255,.2);
+    display:flex;align-items:center;justify-content:center;
+    text-decoration:none;transition:all .2s;color:rgba(255,255,255,.6);
+  }
+  .footer-social a:hover{border-color:var(--verde);background:var(--verde);color:#fff}
+  .footer-social a svg{width:16px;height:16px}
+  .footer-col h4{font-size:.78rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:1rem}
+  .footer-col a{
+    display:block;font-size:.83rem;color:rgba(255,255,255,.6);
+    text-decoration:none;margin-bottom:.6rem;cursor:pointer;transition:color .2s;
+  }
+  .footer-col a:hover{color:var(--verde-claro)}
+  .footer-bottom{
+    border-top:1px solid rgba(255,255,255,.08);
+    padding-top:1.5rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;
+  }
+  .footer-bottom p{font-size:.75rem;color:rgba(255,255,255,.35)}
+  .footer-bottom a{color:var(--verde-claro);text-decoration:none}
+
+  /* ========== AGROLAB NAV ========== */
+  .agrolab-nav-indicator{
+    position:fixed;top:72px;left:0;right:0;z-index:997;
+    background:var(--verde);color:#fff;
+    text-align:center;font-size:.75rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;
+    padding:.35rem;display:none;
+  }
+  #page-agrolab .agrolab-nav-indicator,
+  #page-miembro .agrolab-nav-indicator{display:none}
+
+  /* ========== BACK BTN ========== */
+  .back-btn{
+    display:inline-flex;align-items:center;gap:.5rem;
+    background:#fff;border:1.5px solid rgba(0,0,0,.1);
+    border-radius:30px;padding:.55rem 1.2rem;
+    font-size:.82rem;font-weight:500;color:var(--negro);
+    cursor:pointer;transition:all .2s;margin:1.5rem 0 0 5%;
+    position:relative;z-index:10;
+  }
+  .back-btn:hover{background:var(--verde);color:#fff;border-color:var(--verde)}
+  .back-btn svg{width:16px;height:16px}
+
+  /* ========== AGROLAB PREVIEW (home) ========== */
+  .agrolab-preview{
+    background:linear-gradient(135deg,#1a3d1a 0%,#2e5d2e 50%,#1a2d0a 100%);
+    color:#fff;text-align:center;
+  }
+  .agrolab-preview .section-label{color:var(--naranja-cta)}
+  .agrolab-preview .section-title{color:#fff}
+  .agrolab-preview p{color:rgba(255,255,255,.75);max-width:600px;margin:0 auto 2rem;line-height:1.7}
+  .agrolab-features{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1.5rem;margin-top:3rem;text-align:left}
+  .agrolab-feat{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);border-radius:var(--radius);padding:1.5rem}
+  .agrolab-feat svg{width:28px;height:28px;color:var(--naranja-cta);margin-bottom:.8rem}
+  .agrolab-feat h4{font-size:.9rem;font-weight:600;margin-bottom:.3rem}
+  .agrolab-feat p{font-size:.78rem;color:rgba(255,255,255,.6);line-height:1.5}
+
+  /* ========== REVEAL ANIMATIONS ========== */
+  .reveal{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease}
+  .reveal.visible{opacity:1;transform:translateY(0)}
+  .reveal-delay-1{transition-delay:.1s}
+  .reveal-delay-2{transition-delay:.2s}
+  .reveal-delay-3{transition-delay:.3s}
+  .reveal-delay-4{transition-delay:.4s}
+
+  /* ========== RESPONSIVE ========== */
+  @media(max-width:900px){
+    .nosotros-grid,.qs-grid,.mv-grid,.contacto-grid,.miembro-body-grid,.footer-grid{
+      grid-template-columns:1fr;gap:2rem;
+    }
+    .form-grid{grid-template-columns:1fr}
+    .nav-links{display:none}
+    .hamburger{display:flex}
+  }
+  @media(max-width:600px){
+    section{padding:3.5rem 5%}
+    .carousel-slide{flex:0 0 85%}
+  }
+</style>
+</head>
+<body>
+
+<!-- ===================== NAVBAR ===================== -->
+<nav id="navbar">
+  <a class="nav-logo" onclick="goHome()">
+    <svg class="nav-logo-icon" viewBox="0 0 44 44" fill="none">
+      <circle cx="22" cy="22" r="22" fill="#e8f5e9"/>
+      <path d="M12 28 Q16 18 22 16 Q28 18 32 28" stroke="#2e7d32" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+      <path d="M18 28 Q20 22 22 20 Q24 22 26 28" stroke="#4caf50" stroke-width="2" fill="none" stroke-linecap="round"/>
+      <circle cx="30" cy="14" r="5" fill="#f57c00" opacity=".9"/>
+      <path d="M30 9 L30 7M30 19 L30 21M35 14 L37 14M23 14 L25 14M33.5 10.5 L35 9M25 19.5 L23.5 21M33.5 17.5 L35 19M25 8.5 L23.5 7" stroke="#f57c00" stroke-width="1.5" stroke-linecap="round"/>
+    </svg>
+    <div>
+      <div class="nav-logo-text">Raíz Caribe</div>
+      <div class="nav-logo-sub">Asociación Agroempresaria</div>
+    </div>
+  </a>
+  <div class="nav-links">
+    <a onclick="scrollToSection('inicio')">Inicio</a>
+    <a onclick="scrollToSection('nosotros')">Nosotros</a>
+    <a onclick="scrollToSection('miembros')">Miembros</a>
+    <a onclick="goAgrolab()">AgroLab</a>
+    <a onclick="scrollToSection('contacto')">Contacto</a>
+    <a class="btn-nav" onclick="scrollToSection('contacto')">Contáctanos</a>
+  </div>
+  <div class="hamburger" id="hamburger" onclick="toggleMobile()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a onclick="scrollToSection('inicio');closeMobile()">Inicio</a>
+  <a onclick="scrollToSection('nosotros');closeMobile()">Nosotros</a>
+  <a onclick="scrollToSection('miembros');closeMobile()">Miembros</a>
+  <a onclick="goAgrolab();closeMobile()">AgroLab</a>
+  <a onclick="scrollToSection('contacto');closeMobile()">Contacto</a>
+</div>
+
+<!-- ===================== PÁGINA HOME ===================== -->
+<div id="page-home" class="page active">
+
+  <!-- HERO -->
+  <section id="inicio" class="hero">
+    <div class="hero-bg" id="heroBg"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <div class="hero-badge">
+        <div class="hero-badge-dot"></div>
+        Sello Verde CARSUCRE
+      </div>
+      <h1>Raíces que <em>transforman</em><br>comunidades</h1>
+      <p>Asociación Agroempresaria del Caribe que impulsa el desarrollo social, la sostenibilidad y el bienestar de comunidades rurales del Caribe colombiano.</p>
+      <div class="hero-btns">
+        <button class="btn-primary" onclick="scrollToSection('nosotros')">
+          Conoce más sobre nosotros
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </button>
+        <button class="btn-secondary" onclick="goAgrolab()">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+          AgroLab
+        </button>
+      </div>
+    </div>
+    <div class="hero-scroll" onclick="scrollToSection('carousel')">
+      <span>Explorar</span>
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M7 10l5 5 5-5"/></svg>
+    </div>
+  </section>
+
+  <!-- CARRUSEL -->
+  <div id="carousel" class="carousel-section">
+    <div class="carousel-inner">
+      <div class="carousel-track-wrap">
+        <div class="carousel-track" id="carouselTrack">
+          <div class="carousel-slide">
+            <img src="https://images.unsplash.com/photo-1606814893907-3bc7c98fcc05?w=800&q=75" alt="Comunidades agrícolas" loading="lazy"/>
+            <div class="carousel-slide-caption">Comunidades agrícolas del Caribe</div>
+          </div>
+          <div class="carousel-slide">
+            <img src="https://images.unsplash.com/photo-1495107334309-fcf20504a5ab?w=800&q=75" alt="Cultivos sostenibles" loading="lazy"/>
+            <div class="carousel-slide-caption">Cultivos sostenibles</div>
+          </div>
+          <div class="carousel-slide">
+            <img src="https://images.unsplash.com/photo-1464226184884-fa280b87c399?w=800&q=75" alt="Mujeres emprendedoras" loading="lazy"/>
+            <div class="carousel-slide-caption">Mujeres emprendedoras</div>
+          </div>
+          <div class="carousel-slide">
+            <img src="https://images.unsplash.com/photo-1542601906897-edc4b3c4fb48?w=800&q=75" alt="Encadenamientos productivos" loading="lazy"/>
+            <div class="carousel-slide-caption">Encadenamientos productivos</div>
+          </div>
+          <div class="carousel-slide">
+            <img src="https://images.unsplash.com/photo-1500595046743-cd271d694d30?w=800&q=75" alt="Seguridad alimentaria" loading="lazy"/>
+            <div class="carousel-slide-caption">Seguridad alimentaria</div>
+          </div>
+        </div>
+      </div>
+      <div class="carousel-controls">
+        <button class="carousel-btn" id="carouselPrev" aria-label="Anterior">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg>
+        </button>
+        <div class="carousel-dots" id="carouselDots"></div>
+        <button class="carousel-btn" id="carouselNext" aria-label="Siguiente">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- IMPACTO SOCIAL -->
+  <section id="impacto">
+    <div class="section-header reveal">
+      <span class="section-label">Nuestro impacto</span>
+      <h2 class="section-title">Transformando vidas<br>en el Caribe</h2>
+      <p class="section-subtitle">Trabajamos por el desarrollo integral de comunidades vulnerables a través de estrategias sostenibles y encadenamientos productivos.</p>
+    </div>
+    <div class="impacto-grid">
+      <div class="impacto-card reveal reveal-delay-1">
+        <div class="impacto-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20z"/><path d="M12 6v6l4 2"/></svg>
+        </div>
+        <div class="impacto-stat">🌿 Sello</div>
+        <h3>Impacto Ambiental</h3>
+        <p>Avalados con el Sello Verde CARSUCRE. Buenas prácticas agrícolas y compromiso real con la sostenibilidad ambiental del Caribe.</p>
+      </div>
+      <div class="impacto-card reveal reveal-delay-2">
+        <div class="impacto-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <div class="impacto-stat">+500</div>
+        <h3>Impacto Social</h3>
+        <p>Apoyamos mujeres cabeza de hogar, víctimas del conflicto, comunidades indígenas, campesinos, niños y mujeres rurales.</p>
+      </div>
+      <div class="impacto-card reveal reveal-delay-3">
+        <div class="impacto-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4zM3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+        </div>
+        <div class="impacto-stat">+80</div>
+        <h3>Encadenamientos</h3>
+        <p>Incentivamos la compra directa a productores garantizando ingresos justos y cadenas de valor sostenibles.</p>
+      </div>
+      <div class="impacto-card reveal reveal-delay-4">
+        <div class="impacto-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+        </div>
+        <div class="impacto-stat">+30</div>
+        <h3>Emprendimientos</h3>
+        <p>Asesorías, capacitación, articulación institucional y apoyo integral a emprendedores del sector agro.</p>
+      </div>
+      <div class="impacto-card reveal reveal-delay-1">
+        <div class="impacto-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        </div>
+        <div class="impacto-stat">♻</div>
+        <h3>Reconstrucción Social</h3>
+        <p>Inclusión, equidad y desarrollo comunitario como pilares de nuestra intervención territorial.</p>
+      </div>
+      <div class="impacto-card reveal reveal-delay-2">
+        <div class="impacto-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        </div>
+        <div class="impacto-stat">🌾</div>
+        <h3>Seguridad Alimentaria</h3>
+        <p>Transferencia de conocimiento y fortalecimiento de nuevos cultivos para garantizar la soberanía alimentaria.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- NOSOTROS -->
+  <section id="nosotros" style="background:var(--beige)">
+    <div class="nosotros-grid">
+      <div class="nosotros-img-wrap reveal">
+        <img src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=800&q=75" alt="Historia Raíz Caribe" loading="lazy"/>
+        <div class="nosotros-img-badge">
+          <strong>2018</strong>
+          <span>Año de fundación</span>
+        </div>
+      </div>
+      <div class="nosotros-text reveal reveal-delay-2">
+        <span class="section-label">Nuestra historia</span>
+        <h2 class="section-title">De semillas a<br>transformación</h2>
+        <p>Raíz Caribe nació del sueño de un grupo de emprendedores del Caribe colombiano que creyeron en el poder del trabajo colectivo. Desde Sucre y la región Caribe, hemos construido un ecosistema agroempresarial que conecta productores, consumidores e instituciones.</p>
+        <p>Hoy somos más de 30 emprendimientos aliados, con presencia en varias comunidades del Caribe, generando impacto real en la vida de cientos de familias.</p>
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="timeline-dot">01</div>
+            <div>
+              <h4>Fundación de la asociación</h4>
+              <p>Inicio del trabajo colectivo en comunidades del Caribe.</p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-dot">02</div>
+            <div>
+              <h4>Sello Verde CARSUCRE</h4>
+              <p>Reconocimiento oficial por buenas prácticas ambientales.</p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-dot">03</div>
+            <div>
+              <h4>Lanzamiento de AgroLab</h4>
+              <p>Escuela para empresarios agroindustriales del Caribe.</p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-dot">04</div>
+            <div>
+              <h4>Red de +30 miembros</h4>
+              <p>Ecosistema consolidado de emprendimientos sostenibles.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="lineas-grid" style="margin-top:4rem">
+      <div style="grid-column:1/-1" class="reveal">
+        <span class="section-label">Líneas de trabajo</span>
+        <h2 class="section-title">Cómo generamos impacto</h2>
+      </div>
+      <div class="linea-card reveal reveal-delay-1">
+        <img src="https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=600&q=75" alt="Agricultura" loading="lazy"/>
+        <div class="linea-overlay">
+          <h4>Agricultura Sostenible</h4>
+          <p>Prácticas regenerativas y cultivos responsables</p>
+        </div>
+      </div>
+      <div class="linea-card reveal reveal-delay-2">
+        <img src="https://images.unsplash.com/photo-1542601906897-edc4b3c4fb48?w=600&q=75" alt="Comercialización" loading="lazy"/>
+        <div class="linea-overlay">
+          <h4>Comercialización Justa</h4>
+          <p>Canales directos y precios equitativos</p>
+        </div>
+      </div>
+      <div class="linea-card reveal reveal-delay-3">
+        <img src="https://images.unsplash.com/photo-1509099836639-18ba1795216d?w=600&q=75" alt="Formación" loading="lazy"/>
+        <div class="linea-overlay">
+          <h4>Formación y Capacitación</h4>
+          <p>Conocimiento para el desarrollo empresarial</p>
+        </div>
+      </div>
+      <div class="linea-card reveal reveal-delay-4">
+        <img src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=600&q=75" alt="Inclusión" loading="lazy"/>
+        <div class="linea-overlay">
+          <h4>Inclusión Social</h4>
+          <p>Equidad y oportunidades para todos</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROPÓSITO -->
+  <section class="proposito-section">
+    <div class="section-header reveal">
+      <span class="section-label">Nuestro propósito</span>
+      <h2 class="section-title">Por qué existimos</h2>
+      <p class="proposito-text">Creemos que el campo colombiano tiene el potencial de transformar vidas. Trabajamos cada día para que los productores del Caribe tengan las herramientas, redes y oportunidades que merecen.</p>
+    </div>
+    <div class="valores-grid">
+      <div class="valor-item reveal reveal-delay-1">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        <h4>Confianza</h4>
+        <p>Relaciones transparentes con productores e instituciones.</p>
+      </div>
+      <div class="valor-item reveal reveal-delay-2">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg>
+        <h4>Innovación</h4>
+        <p>Soluciones creativas para los retos del campo colombiano.</p>
+      </div>
+      <div class="valor-item reveal reveal-delay-3">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        <h4>Territorio</h4>
+        <p>Arraigo profundo en las comunidades del Caribe colombiano.</p>
+      </div>
+      <div class="valor-item reveal reveal-delay-4">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        <h4>Impacto</h4>
+        <p>Resultados medibles en la calidad de vida de las comunidades.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- MIEMBROS -->
+  <section id="miembros" class="miembros-section">
+    <div class="section-header reveal">
+      <span class="section-label">Nuestro ecosistema</span>
+      <h2 class="section-title">Miembros de la asociación</h2>
+      <p class="section-subtitle">Emprendimientos que construyen un Caribe más próspero, sostenible e inclusivo.</p>
+    </div>
+    <div class="miembros-grid" id="miembrosGrid">
+      <!-- generado por JS -->
+    </div>
+  </section>
+
+  <!-- AGROLAB PREVIEW -->
+  <section class="agrolab-preview">
+    <div class="section-header reveal">
+      <span class="section-label">Escuela AgroLab</span>
+      <h2 class="section-title">Formamos empresarios<br>agroindustriales</h2>
+      <p>AgroLab Raíz es nuestra escuela para emprendedores del sector agro. Capacitamos, asesoramos y acompañamos a quienes quieren transformar el campo en empresa.</p>
+      <button class="btn-primary" onclick="goAgrolab()" style="margin-top:1.5rem">
+        Conocer AgroLab
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </button>
+    </div>
+    <div class="agrolab-features">
+      <div class="agrolab-feat reveal reveal-delay-1">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+        <h4>Capacitaciones</h4>
+        <p>Programas formativos para el sector agroindustrial.</p>
+      </div>
+      <div class="agrolab-feat reveal reveal-delay-2">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        <h4>Asesorías</h4>
+        <p>Acompañamiento personalizado para tu emprendimiento.</p>
+      </div>
+      <div class="agrolab-feat reveal reveal-delay-3">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+        <h4>Articulación</h4>
+        <p>Conexión con instituciones y mercados estratégicos.</p>
+      </div>
+      <div class="agrolab-feat reveal reveal-delay-4">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+        <h4>Formación integral</h4>
+        <p>Habilidades técnicas, empresariales y de liderazgo.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ALIADOS -->
+  <div class="aliados-section">
+    <div class="aliados-inner">
+      <span class="section-label">Aliados estratégicos</span>
+      <h2 class="section-title" style="font-size:1.6rem">Confían en nuestro trabajo</h2>
+    </div>
+    <div class="aliados-track-wrap">
+      <div class="aliados-track" id="aliadosTrack"></div>
+    </div>
+  </div>
+
+  <!-- CONTACTO -->
+  <section id="contacto">
+    <div class="section-header reveal">
+      <span class="section-label">Hablemos</span>
+      <h2 class="section-title">¿Tienes una idea?<br>Trabajemos juntos</h2>
+    </div>
+    <div class="contacto-grid">
+      <div class="contacto-info reveal">
+        <p>Somos una asociación abierta a alianzas, nuevos miembros y colaboraciones que aporten al desarrollo del Caribe colombiano.</p>
+        <div class="contacto-dato">
+          <div class="contacto-dato-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          </div>
+          <div class="contacto-dato-text">
+            <span>Correo</span>
+            <strong>contacto@raizcaribe.com</strong>
+          </div>
+        </div>
+        <div class="contacto-dato">
+          <div class="contacto-dato-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          </div>
+          <div class="contacto-dato-text">
+            <span>Ubicación</span>
+            <strong>Sucre, Colombia</strong>
+          </div>
+        </div>
+        <div class="contacto-dato">
+          <div class="contacto-dato-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 2.18h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          </div>
+          <div class="contacto-dato-text">
+            <span>WhatsApp</span>
+            <strong>+57 300 000 0000</strong>
+          </div>
+        </div>
+        <div class="contacto-dato">
+          <div class="contacto-dato-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          </div>
+          <div class="contacto-dato-text">
+            <span>Instagram</span>
+            <strong>@raizcaribe</strong>
+          </div>
+        </div>
+      </div>
+      <div class="reveal reveal-delay-2">
+        <form id="contactoForm" onsubmit="submitForm(event,'contactoForm','contactoSuccess')">
+          <div class="form-grid">
+            <div class="form-group"><label>Nombre completo</label><input type="text" placeholder="Tu nombre" required/></div>
+            <div class="form-group"><label>Correo electrónico</label><input type="email" placeholder="tu@correo.com" required/></div>
+            <div class="form-group"><label>Teléfono</label><input type="tel" placeholder="+57 300 000 0000"/></div>
+            <div class="form-group"><label>Ciudad</label><input type="text" placeholder="Tu ciudad"/></div>
+            <div class="form-group"><label>Tipo de usuario</label>
+              <select>
+                <option value="">Selecciona...</option>
+                <option>Tienda</option>
+                <option>Emprendedor</option>
+                <option>Distribuidor</option>
+                <option>Aliado institucional</option>
+              </select>
+            </div>
+            <div class="form-group full"><label>Mensaje</label><textarea placeholder="Cuéntanos tu idea o consulta..." required></textarea></div>
+            <div class="form-group full">
+              <button type="submit" class="btn-verde">
+                Enviar solicitud
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+              </button>
+            </div>
+          </div>
+          <div class="form-success" id="contactoSuccess">
+            ✅ ¡Mensaje enviado! Te contactaremos pronto.
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+</div><!-- /page-home -->
+
+<!-- ===================== PÁGINA MIEMBRO ===================== -->
+<div id="page-miembro" class="page">
+  <button class="back-btn" onclick="goHome()">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+    Volver a Miembros
+  </button>
+  <div class="miembro-hero" id="miembroHero">
+    <div class="miembro-hero-bg" id="miembroHeroBg"></div>
+    <div class="miembro-hero-overlay"></div>
+    <div class="miembro-hero-content">
+      <h1 id="miembroNombre">Nombre Miembro</h1>
+      <p id="miembroCategoria">Categoría</p>
+    </div>
+  </div>
+  <div class="miembro-body">
+    <div class="miembro-body-grid">
+      <div>
+        <p class="miembro-desc" id="miembroDesc"></p>
+        <h2 class="productos-title">Productos</h2>
+        <div class="productos-filters" id="productosFilters"></div>
+        <div class="productos-grid" id="productosGrid"></div>
+      </div>
+      <div>
+        <div class="miembro-sidebar">
+          <h3>Contacto & Redes</h3>
+          <div class="contact-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            <span id="miembroUbicacion">Sucre, Colombia</span>
+          </div>
+          <div class="contact-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 2.18h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            <span id="miembroTelefono">+57 300 000 0000</span>
+          </div>
+          <div class="social-links" id="miembroSocial"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== PÁGINA AGROLAB ===================== -->
+<div id="page-agrolab" class="page">
+
+  <!-- HERO AGROLAB -->
+  <div class="agrolab-hero">
+    <div class="agrolab-hero-bg"></div>
+    <div class="agrolab-hero-overlay"></div>
+    <div class="agrolab-hero-content">
+      <p class="agrolab-hero-sub">Escuela para Empresarios</p>
+      <div class="agrolab-logo-text">Agro<span>Lab</span></div>
+      <p style="font-size:.85rem;letter-spacing:.1em;text-transform:uppercase;opacity:.6;margin:.3rem 0 1.5rem">Raíz Caribe</p>
+      <p>Formamos empresarios agroindustriales con visión, herramientas y redes para transformar el campo colombiano.</p>
+      <button class="btn-primary" onclick="scrollAgrolab('agrolab-formulario')">
+        Quiero ser parte de AgroLab
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <button class="back-btn" onclick="goHome()">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+    Volver al inicio
+  </button>
+
+  <!-- QUIÉNES SOMOS AGROLAB -->
+  <section id="agrolab-qs" style="background:var(--beige)">
+    <div class="qs-grid">
+      <div class="reveal">
+        <span class="section-label">¿Quiénes somos?</span>
+        <h2 class="section-title">Una escuela fundada por<br>quienes viven el campo</h2>
+        <p style="color:var(--gris-texto);line-height:1.8;margin-bottom:1rem">AgroLab Raíz es una escuela fundada por empresarios agroindustriales con la misión de guiar a emprendedores hacia la construcción de emprendimientos sostenibles, rentables y con impacto social.</p>
+        <p style="color:var(--gris-texto);line-height:1.8;margin-bottom:1.5rem">Combinamos conocimiento técnico, experiencia real del sector y una red de aliados estratégicos para que nuestros estudiantes lleguen al siguiente nivel.</p>
+        <button class="btn-outline-verde" onclick="scrollAgrolab('agrolab-formulario')">Únete a AgroLab</button>
+      </div>
+      <div class="qs-img reveal reveal-delay-2">
+        <img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=700&q=75" alt="Equipo AgroLab" loading="lazy"/>
+      </div>
+    </div>
+  </section>
+
+  <!-- MISIÓN / VISIÓN -->
+  <section>
+    <div class="section-header reveal">
+      <span class="section-label">Nuestra identidad</span>
+      <h2 class="section-title">Lo que nos mueve</h2>
+    </div>
+    <div class="mv-grid">
+      <div class="mv-card mision reveal reveal-delay-1">
+        <div class="mv-num">M</div>
+        <h3>Misión</h3>
+        <p>Guiar a emprendedores del sector agroindustrial colombiano hacia la construcción de emprendimientos rentables, sostenibles y con profundo impacto social, a través de formación de calidad, asesoría especializada y articulación estratégica con instituciones y mercados.</p>
+      </div>
+      <div class="mv-card vision reveal reveal-delay-2">
+        <div class="mv-num">V</div>
+        <h3>Visión</h3>
+        <p>Ser la escuela de referencia del Caribe colombiano para la formación de líderes agroindustriales, reconocida por la transformación real de comunidades rurales y la creación de un ecosistema empresarial agro próspero, inclusivo y sostenible al 2030.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ASESORÍAS -->
+  <section style="background:var(--beige)">
+    <div class="section-header reveal">
+      <span class="section-label">Servicios</span>
+      <h2 class="section-title">Nuestras asesorías</h2>
+      <p class="section-subtitle">Acompañamiento especializado en cada etapa de tu emprendimiento.</p>
+    </div>
+    <div class="asesorias-grid">
+      <div class="asesoria-card reveal reveal-delay-1">
+        <div class="asesoria-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg></div>
+        <h3>Plan de negocio agro</h3>
+        <p>Diseñamos junto a ti un modelo de negocio viable, rentable y sostenible para el sector agroindustrial.</p>
+      </div>
+      <div class="asesoria-card reveal reveal-delay-2">
+        <div class="asesoria-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4zM3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg></div>
+        <h3>Comercialización</h3>
+        <p>Estrategias para llevar tus productos al mercado con canales directos e intermediados.</p>
+      </div>
+      <div class="asesoria-card reveal reveal-delay-3">
+        <div class="asesoria-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+        <h3>Financiamiento</h3>
+        <p>Orientación para acceder a créditos, fondos y programas de financiamiento para el agro.</p>
+      </div>
+      <div class="asesoria-card reveal reveal-delay-4">
+        <div class="asesoria-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+        <h3>BPA y certificaciones</h3>
+        <p>Acompañamiento en buenas prácticas agrícolas y procesos de certificación.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CAPACITACIONES -->
+  <section>
+    <div class="section-header reveal">
+      <span class="section-label">Programas</span>
+      <h2 class="section-title">Capacitaciones AgroLab</h2>
+      <p class="section-subtitle">Talleres, diplomados y programas diseñados para el empresario del campo.</p>
+    </div>
+    <div class="cap-grid">
+      <div class="cap-card reveal reveal-delay-1">
+        <img src="https://images.unsplash.com/photo-1542601906897-edc4b3c4fb48?w=700&q=75" alt="Agronegocios" loading="lazy"/>
+        <div class="cap-overlay">
+          <span class="cap-tag">Diplomado</span>
+          <h3>Fundamentos de Agronegocios</h3>
+          <p>8 semanas · Presencial y virtual</p>
+        </div>
+      </div>
+      <div class="cap-card reveal reveal-delay-2">
+        <img src="https://images.unsplash.com/photo-1500595046743-cd271d694d30?w=700&q=75" alt="Sostenibilidad" loading="lazy"/>
+        <div class="cap-overlay">
+          <span class="cap-tag">Taller</span>
+          <h3>Agricultura Sostenible</h3>
+          <p>2 días intensivos · Presencial</p>
+        </div>
+      </div>
+      <div class="cap-card reveal reveal-delay-3">
+        <img src="https://images.unsplash.com/photo-1509099836639-18ba1795216d?w=700&q=75" alt="Marketing" loading="lazy"/>
+        <div class="cap-overlay">
+          <span class="cap-tag">Programa</span>
+          <h3>Marketing para el Campo</h3>
+          <p>4 semanas · Virtual</p>
+        </div>
+      </div>
+      <div class="cap-card reveal reveal-delay-4">
+        <img src="https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=700&q=75" alt="Liderazgo" loading="lazy"/>
+        <div class="cap-overlay">
+          <span class="cap-tag">Taller</span>
+          <h3>Liderazgo Comunitario</h3>
+          <p>1 día · Presencial</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FORMULARIO AGROLAB -->
+  <section id="agrolab-formulario" class="formulario-section">
+    <div class="section-header reveal">
+      <span class="section-label">Únete</span>
+      <h2 class="section-title">¿Quieres ser parte<br>de AgroLab?</h2>
+      <p class="section-subtitle">Completa el formulario y uno de nuestros asesores se comunicará contigo.</p>
+    </div>
+    <div class="formulario-wrap">
+      <form id="agrolabForm" onsubmit="submitForm(event,'agrolabForm','agrolabSuccess')">
+        <div class="form-grid">
+          <div class="form-group"><label>Nombre completo</label><input type="text" placeholder="Tu nombre" required/></div>
+          <div class="form-group"><label>Correo electrónico</label><input type="email" placeholder="tu@correo.com" required/></div>
+          <div class="form-group"><label>Teléfono</label><input type="tel" placeholder="+57 300 000 0000"/></div>
+          <div class="form-group"><label>Ciudad</label><input type="text" placeholder="Tu ciudad" required/></div>
+          <div class="form-group full"><label>Mensaje / ¿En qué área necesitas apoyo?</label><textarea placeholder="Cuéntanos sobre tu emprendimiento o interés..." required></textarea></div>
+          <div class="form-group full">
+            <button type="submit" class="btn-verde">
+              Quiero ser parte de AgroLab
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+            </button>
+          </div>
+        </div>
+        <div class="form-success" id="agrolabSuccess">
+          ✅ ¡Formulario enviado! Te contactaremos muy pronto.
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <!-- ALIADOS AGROLAB -->
+  <div class="aliados-section">
+    <div class="aliados-inner">
+      <span class="section-label">Aliados estratégicos</span>
+      <h2 class="section-title" style="font-size:1.6rem">Respaldados por grandes organizaciones</h2>
+    </div>
+    <div class="aliados-track-wrap">
+      <div class="aliados-track" id="aliadosTrack2"></div>
+    </div>
+  </div>
+
+</div><!-- /page-agrolab -->
+
+<!-- ===================== FOOTER ===================== -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:.5rem">
+        <svg width="36" height="36" viewBox="0 0 44 44" fill="none">
+          <circle cx="22" cy="22" r="22" fill="rgba(46,125,50,.2)"/>
+          <path d="M12 28 Q16 18 22 16 Q28 18 32 28" stroke="#4caf50" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+          <circle cx="30" cy="14" r="5" fill="#f57c00" opacity=".8"/>
+        </svg>
+        <span style="font-family:var(--font-display);font-size:1.1rem;font-weight:700">Raíz Caribe</span>
+      </div>
+      <p>Asociación Agroempresaria del Caribe. Impulsando el desarrollo social, la sostenibilidad y el bienestar de comunidades rurales.</p>
+      <div class="footer-social">
+        <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+        <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+        <a href="#" aria-label="WhatsApp"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Navegación</h4>
+      <a onclick="scrollToSection('inicio')">Inicio</a>
+      <a onclick="scrollToSection('nosotros')">Nosotros</a>
+      <a onclick="scrollToSection('miembros')">Miembros</a>
+      <a onclick="goAgrolab()">AgroLab</a>
+      <a onclick="scrollToSection('contacto')">Contacto</a>
+    </div>
+    <div class="footer-col">
+      <h4>Contacto</h4>
+      <a href="mailto:contacto@raizcaribe.com">contacto@raizcaribe.com</a>
+      <a href="#">+57 300 000 0000</a>
+      <a href="#">Sucre, Colombia</a>
+      <a href="#">@raizcaribe</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 Raíz Caribe · Asociación Agroempresaria del Caribe · Todos los derechos reservados.</p>
+    <p>Desarrollado con ♥ por <a href="#">Raíz Digital</a></p>
+  </div>
+</footer>
+
+<!-- ===================== SCRIPT ===================== -->
+<script>
+// ---- DATOS MIEMBROS ----
+const miembros = [
+  {id:1,nombre:"Miel Nativa Caribe",categoria:"Apicultura",desc:"Emprendimiento familiar dedicado a la producción y comercialización de mieles nativas del Caribe colombiano. Trabajan con abejas silvestres en ecosistemas naturales preservados.",img:"https://images.unsplash.com/photo-1558642452-9d2a7deb7f62?w=600&q=70",ubicacion:"Sincelejo, Sucre",telefono:"+57 311 000 0001",instagram:"@mielnativacaribe",facebook:"Miel Nativa Caribe",whatsapp:"+57 311 000 0001",productos:[{nombre:"Miel Silvestre 500g",cat:"Miel",img:"https://images.unsplash.com/photo-1587049352846-4a222e784d38?w=400&q=65",precio:"$18.000"},{nombre:"Miel de Angelita",cat:"Miel",img:"https://images.unsplash.com/photo-1471943311424-646960669fbc?w=400&q=65",precio:"$25.000"},{nombre:"Kit Degustación",cat:"Kits",img:"https://images.unsplash.com/photo-1550583724-b2692b85b150?w=400&q=65",precio:"$45.000"}]},
+  {id:2,nombre:"Frutas del Caribe",categoria:"Fruticultura",desc:"Productores de frutas tropicales frescas y procesadas. Cultivan mango, guayaba, maracuyá y tamarindo bajo prácticas de agricultura sostenible con sello verde.",img:"https://images.unsplash.com/photo-1619566636858-adf3ef46400b?w=600&q=70",ubicacion:"Corozal, Sucre",telefono:"+57 312 000 0002",instagram:"@frutasdelcaribe",facebook:"Frutas del Caribe",whatsapp:"+57 312 000 0002",productos:[{nombre:"Pulpa de Mango x500g",cat:"Pulpas",img:"https://images.unsplash.com/photo-1547514701-42782101795e?w=400&q=65",precio:"$8.000"},{nombre:"Bocadillo de Guayaba",cat:"Confitería",img:"https://images.unsplash.com/photo-1565299543923-37dd37887442?w=400&q=65",precio:"$12.000"},{nombre:"Mermelada Tropical",cat:"Confitería",img:"https://images.unsplash.com/photo-1534440801787-2b4f8e4e8b75?w=400&q=65",precio:"$15.000"}]},
+  {id:3,nombre:"Cacao Ancestral",categoria:"Cacao & Chocolate",desc:"Productores de cacao fino de aroma del Caribe. Trabajan con comunidades indígenas preservando variedades ancestrales y produciendo chocolate artesanal de alta calidad.",img:"https://images.unsplash.com/photo-1606312619070-d48b7c8e5f87?w=600&q=70",ubicacion:"San Marcos, Sucre",telefono:"+57 313 000 0003",instagram:"@cacaoancestral",facebook:"Cacao Ancestral Caribe",whatsapp:"+57 313 000 0003",productos:[{nombre:"Cacao en Grano 1kg",cat:"Cacao",img:"https://images.unsplash.com/photo-1606312619070-d48b7c8e5f87?w=400&q=65",precio:"$28.000"},{nombre:"Chocolate 70% Cacao",cat:"Chocolate",img:"https://images.unsplash.com/photo-1481391319762-47dff72954d9?w=400&q=65",precio:"$12.000"},{nombre:"Nibs de Cacao",cat:"Cacao",img:"https://images.unsplash.com/photo-1511381939415-e44015466834?w=400&q=65",precio:"$18.000"}]},
+  {id:4,nombre:"Hierbas Silvestres",categoria:"Plantas medicinales",desc:"Cultivo y procesamiento de plantas medicinales y aromáticas del Caribe. Producen infusiones, aceites esenciales y productos naturales para el bienestar.",img:"https://images.unsplash.com/photo-1466637574441-749b8f19452f?w=600&q=70",ubicacion:"Sampués, Sucre",telefono:"+57 314 000 0004",instagram:"@hierbassilvestres",facebook:"Hierbas Silvestres",whatsapp:"+57 314 000 0004",productos:[{nombre:"Infusión Digestiva",cat:"Infusiones",img:"https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=400&q=65",precio:"$9.000"},{nombre:"Aceite de Ajonjolí",cat:"Aceites",img:"https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?w=400&q=65",precio:"$22.000"},{nombre:"Kit Bienestar",cat:"Kits",img:"https://images.unsplash.com/photo-1540420828642-fca2c5c18abe?w=400&q=65",precio:"$55.000"}]},
+  {id:5,nombre:"Pesca Artesanal Caribe",categoria:"Pesca",desc:"Cooperativa de pescadores artesanales del Caribe. Ofrecen pescado fresco, ahumado y en conserva directamente del mar a la mesa, con trazabilidad completa.",img:"https://images.unsplash.com/photo-1578474846511-04ba529f0b88?w=600&q=70",ubicacion:"Tolú, Sucre",telefono:"+57 315 000 0005",instagram:"@pescaartesanalcaribe",facebook:"Pesca Artesanal Caribe",whatsapp:"+57 315 000 0005",productos:[{nombre:"Mojarra Fresca",cat:"Frescos",img:"https://images.unsplash.com/photo-1571482902564-3a3c8975c6b9?w=400&q=65",precio:"$15.000"},{nombre:"Pargo Ahumado",cat:"Ahumados",img:"https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=400&q=65",precio:"$28.000"},{nombre:"Camarones del Golfo",cat:"Frescos",img:"https://images.unsplash.com/photo-1565680018434-b513d5e5fd47?w=400&q=65",precio:"$35.000"}]},
+  {id:6,nombre:"Tejidos Wayuu",categoria:"Artesanías",desc:"Artesanas wayuu que preservan las tradiciones ancestrales del tejido. Producen mochilas, hamacas y accesorios auténticos, generando ingresos dignos para mujeres de la comunidad.",img:"https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=70",ubicacion:"La Guajira",telefono:"+57 316 000 0006",instagram:"@tejidoswayuu",facebook:"Tejidos Wayuu Raíz",whatsapp:"+57 316 000 0006",productos:[{nombre:"Mochila Wayuu Grande",cat:"Mochilas",img:"https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=400&q=65",precio:"$180.000"},{nombre:"Hamaca Artesanal",cat:"Hamacas",img:"https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&q=65",precio:"$350.000"},{nombre:"Manilla Wayuu",cat:"Accesorios",img:"https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=400&q=65",precio:"$25.000"}]},
+  {id:7,nombre:"Ñame & Raíces",categoria:"Tubérculos",desc:"Productores de ñame, yuca y otros tubérculos del Caribe colombiano. Trabajan con familias campesinas en la producción tradicional y el procesamiento agroindustrial.",img:"https://images.unsplash.com/photo-1587735243475-37b1b3e5c1c7?w=600&q=70",ubicacion:"Montería, Córdoba",telefono:"+57 317 000 0007",instagram:"@ñameyraices",facebook:"Ñame y Raíces Caribe",whatsapp:"+57 317 000 0007",productos:[{nombre:"Ñame Espino x5kg",cat:"Frescos",img:"https://images.unsplash.com/photo-1518977676601-b53f82aba655?w=400&q=65",precio:"$12.000"},{nombre:"Harina de Ñame 1kg",cat:"Harinas",img:"https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?w=400&q=65",precio:"$10.000"},{nombre:"Chips de Yuca",cat:"Snacks",img:"https://images.unsplash.com/photo-1544025162-d76538ba77cf?w=400&q=65",precio:"$7.000"}]},
+  {id:8,nombre:"Lácteos Sabana",categoria:"Lácteos",desc:"Productores de queso, suero y derivados lácteos de la Sabana de Sucre. Raza Romosinuano y pastos nativos para productos de sabor auténtico caribeño.",img:"https://images.unsplash.com/photo-1486297678162-eb2a19b0a32d?w=600&q=70",ubicacion:"Sincé, Sucre",telefono:"+57 318 000 0008",instagram:"@lacteossabana",facebook:"Lácteos Sabana",whatsapp:"+57 318 000 0008",productos:[{nombre:"Queso Costeño 500g",cat:"Quesos",img:"https://images.unsplash.com/photo-1452195100486-9cc805987862?w=400&q=65",precio:"$14.000"},{nombre:"Suero Costeño 500ml",cat:"Sueros",img:"https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&q=65",precio:"$8.500"},{nombre:"Mantequilla Artesanal",cat:"Mantequillas",img:"https://images.unsplash.com/photo-1589985270826-4b7bb135bc9d?w=400&q=65",precio:"$12.000"}]}
+];
+
+const aliados = ["SENA","Cámara de Comercio","CARSUCRE","MinAgricultura","FAO Colombia","USAID","Bancóldex","Fondo Emprender","Gobernación Sucre","MADR","Asohofrucol","SAC"];
+
+// ---- RENDER MIEMBROS ----
+function renderMiembros(){
+  const grid=document.getElementById('miembrosGrid');
+  if(!grid)return;
+  grid.innerHTML=miembros.map(m=>`
+    <div class="miembro-card reveal" onclick="goMiembro(${m.id})">
+      <div class="miembro-img"><img src="${m.img}" alt="${m.nombre}" loading="lazy"/></div>
+      <div class="miembro-info">
+        <h3>${m.nombre}</h3>
+        <p>${m.desc.substring(0,90)}...</p>
+        <span class="miembro-tag">${m.categoria}</span>
+      </div>
+    </div>`).join('');
+  observeReveal();
+}
+
+// ---- RENDER ALIADOS ----
+function renderAliados(trackId){
+  const track=document.getElementById(trackId);
+  if(!track)return;
+  const doubled=[...aliados,...aliados];
+  track.innerHTML=doubled.map(a=>`<div class="aliado-logo">${a}</div>`).join('');
+}
+
+// ---- NAVEGACIÓN PÁGINAS ----
+function showPage(id){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+  observeReveal();
+}
+function goHome(){showPage('page-home');renderMiembros()}
+function goAgrolab(){showPage('page-agrolab');renderAliados('aliadosTrack2')}
+function goMiembro(id){
+  const m=miembros.find(x=>x.id===id);
+  if(!m)return;
+  document.getElementById('miembroNombre').textContent=m.nombre;
+  document.getElementById('miembroCategoria').textContent=m.categoria;
+  document.getElementById('miembroDesc').textContent=m.desc;
+  document.getElementById('miembroUbicacion').textContent=m.ubicacion;
+  document.getElementById('miembroTelefono').textContent=m.telefono;
+  document.getElementById('miembroHeroBg').style.cssText=`position:absolute;inset:0;background:url('${m.img}') center/cover;filter:brightness(.5)`;
+  // Social
+  const social=document.getElementById('miembroSocial');
+  social.innerHTML=`
+    <a class="social-link instagram" href="#">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/></svg>
+      Instagram
+    </a>
+    <a class="social-link facebook" href="#">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+      Facebook
+    </a>
+    <a class="social-link whatsapp" href="#">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+      WhatsApp
+    </a>`;
+  // Productos
+  const cats=['Todos',...new Set(m.productos.map(p=>p.cat))];
+  document.getElementById('productosFilters').innerHTML=cats.map((c,i)=>`<button class="filter-btn${i===0?' active':''}" onclick="filterProductos(${m.id},'${c}',this)">${c}</button>`).join('');
+  renderProductos(m.productos);
+  showPage('page-miembro');
+}
+function filterProductos(id,cat,btn){
+  document.querySelectorAll('#productosFilters .filter-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  const m=miembros.find(x=>x.id===id);
+  const prods=cat==='Todos'?m.productos:m.productos.filter(p=>p.cat===cat);
+  renderProductos(prods);
+}
+function renderProductos(prods){
+  document.getElementById('productosGrid').innerHTML=prods.map(p=>`
+    <div class="producto-card">
+      <img src="${p.img}" alt="${p.nombre}" loading="lazy"/>
+      <div class="producto-card-body">
+        <h4>${p.nombre}</h4>
+        <p>${p.cat}</p>
+        <p class="precio">${p.precio}</p>
+      </div>
+    </div>`).join('');
+}
+
+// ---- CARRUSEL ----
+let carouselIdx=0,carouselAuto;
+function initCarousel(){
+  const track=document.getElementById('carouselTrack');
+  const dots=document.getElementById('carouselDots');
+  if(!track||!dots)return;
+  const slides=track.querySelectorAll('.carousel-slide');
+  const total=slides.length;
+  dots.innerHTML=Array.from({length:total},(_,i)=>`<button class="carousel-dot${i===0?' active':''}" aria-label="Slide ${i+1}" onclick="goSlide(${i})"></button>`).join('');
+  updateCarousel();
+  document.getElementById('carouselPrev').onclick=()=>{carouselIdx=(carouselIdx-1+total)%total;updateCarousel()};
+  document.getElementById('carouselNext').onclick=()=>{carouselIdx=(carouselIdx+1)%total;updateCarousel()};
+  carouselAuto=setInterval(()=>{carouselIdx=(carouselIdx+1)%total;updateCarousel()},4000);
+  // swipe
+  let sx=0;
+  track.addEventListener('touchstart',e=>{sx=e.touches[0].clientX},{ passive:true });
+  track.addEventListener('touchend',e=>{
+    const dx=e.changedTouches[0].clientX-sx;
+    if(Math.abs(dx)>50){dx<0?carouselIdx=(carouselIdx+1)%total:carouselIdx=(carouselIdx-1+total)%total;updateCarousel()}
+  });
+}
+function goSlide(i){carouselIdx=i;updateCarousel()}
+function updateCarousel(){
+  const track=document.getElementById('carouselTrack');
+  if(!track)return;
+  const slideW=track.querySelectorAll('.carousel-slide')[0]?.offsetWidth||0;
+  const gap=24;
+  track.style.transform=`translateX(-${carouselIdx*(slideW+gap)}px)`;
+  document.querySelectorAll('.carousel-dot').forEach((d,i)=>{
+    d.classList.toggle('active',i===carouselIdx);
+  });
+}
+
+// ---- SCROLL NAV ----
+function scrollToSection(id){
+  if(!document.getElementById('page-home').classList.contains('active'))goHome();
+  setTimeout(()=>{
+    const el=document.getElementById(id);
+    if(el)el.scrollIntoView({behavior:'smooth'});
+  },100);
+}
+function scrollAgrolab(id){
+  const el=document.getElementById(id);
+  if(el)el.scrollIntoView({behavior:'smooth'});
+}
+
+// ---- MOBILE MENU ----
+function toggleMobile(){document.getElementById('mobileMenu').classList.toggle('open')}
+function closeMobile(){document.getElementById('mobileMenu').classList.remove('open')}
+
+// ---- FORMULARIO ----
+function submitForm(e,formId,successId){
+  e.preventDefault();
+  const success=document.getElementById(successId);
+  success.style.display='block';
+  setTimeout(()=>{success.style.display='none'},4000);
+  document.getElementById(formId).reset();
+}
+
+// ---- SCROLL NAVBAR ----
+window.addEventListener('scroll',()=>{
+  document.getElementById('navbar').classList.toggle('scrolled',window.scrollY>50);
+});
+
+// ---- REVEAL ANIMATIONS ----
+function observeReveal(){
+  const els=document.querySelectorAll('.reveal:not(.visible)');
+  const obs=new IntersectionObserver(entries=>{
+    entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target)}});
+  },{threshold:.12});
+  els.forEach(el=>obs.observe(el));
+}
+
+// ---- INIT ----
+document.addEventListener('DOMContentLoaded',()=>{
+  renderMiembros();
+  renderAliados('aliadosTrack');
+  initCarousel();
+  observeReveal();
+  // parallax hero
+  window.addEventListener('scroll',()=>{
+    const bg=document.getElementById('heroBg');
+    if(bg&&document.getElementById('page-home').classList.contains('active')){
+      bg.style.transform=`scale(1.05) translateY(${window.scrollY*.15}px)`;
+    }
+  });
+});
+</script>
+</body>
+</html>
